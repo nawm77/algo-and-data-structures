@@ -1,0 +1,66 @@
+package org.ilya.Data_structures;
+
+public class LinkedList<T> {
+    private Node<T> head;
+
+    public void addFirst(T t) {
+        Node<T> currentNode = new Node<>(t);
+        currentNode.next = head;
+        head = currentNode;
+    }
+
+    public void addLast(T t) {
+        if(head == null){
+            head = new Node<>(t);
+            return;
+        }
+        Node<T> currentNode = head;
+        while(currentNode.next!=null){
+            currentNode = currentNode.next;
+        }
+        currentNode.next = new Node<>(t);
+    }
+
+    public int get(T t) {
+        if (head == null){
+            return -1;
+        }
+        if(head.value == t){
+           return 1;
+        }
+        Node<T> currentNode = head;
+        int id = 0;
+        while(currentNode.next!=null){
+            id++;
+            if(currentNode.next.value == t){
+                return id;
+            }
+            currentNode = currentNode.next;
+        }
+        return -1;
+    }
+
+    public void remove(T t){
+        if(head == null){
+            return;
+        }
+        if(head.value==t){
+            head = head.next;
+        }
+        Node<T> currentNode = head;
+        while(currentNode.next!=null){
+            if(currentNode.next.value==t){
+                currentNode.next=currentNode.next.next;
+                return;
+            }
+        }
+    }
+    public static class Node<T> {
+        private final T value;
+        private Node<T> next;
+
+        public Node(T value) {
+            this.value = value;
+        }
+    }
+}
