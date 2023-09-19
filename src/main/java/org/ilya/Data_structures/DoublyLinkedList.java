@@ -1,7 +1,6 @@
 package org.ilya.Data_structures;
 
-import java.util.NoSuchElementException;
-import java.util.Objects;
+import java.util.*;
 
 public class DoublyLinkedList<T> {
     private Node<T> head;
@@ -34,7 +33,7 @@ public class DoublyLinkedList<T> {
         last = currentNode;
     }
 
-    public int getId(T t) {
+    public int getId(Object t) {
         if (head == null) {
             return -1;
         }
@@ -72,39 +71,25 @@ public class DoublyLinkedList<T> {
             }
         }
     }
-
-    public void add(T t) {
-        if (contains(t)) {
-            Node<T> currentNode = getNode(t);
-            currentNode.value = t;
-        } else {
-            addLast(t);
-        }
-    }
-
     public Node<T> getNode(T t) {
         if (head.value == t) {
             return head;
         }
-        if (head.previous == t){
+        if (head.previous == t) {
             return head.previous;
         }
         if (!contains(t)) {
             throw new NoSuchElementException("No such element " + t);
         } else {
             Node<T> currentNode = head;
-            while (currentNode.next != null){
-                if(currentNode.next.value == t){
+            while (currentNode.next != null) {
+                if (currentNode.next.value == t) {
                     return currentNode.next;
                 }
                 currentNode = currentNode.next;
             }
         }
         throw new NoSuchElementException("No such element " + t);
-    }
-
-    public int size() {
-        return this.size;
     }
 
     public T findById(int id) {
@@ -133,7 +118,7 @@ public class DoublyLinkedList<T> {
             head.value = e;
             return;
         }
-        if(!contains(t)){
+        if (!contains(t)) {
             throw new IllegalArgumentException("No such element " + t);
         }
         Node<T> currentNode = head;
@@ -146,43 +131,12 @@ public class DoublyLinkedList<T> {
         }
     }
 
-    public void add(int id, T t) {
-        Node<T> currentNode = new Node<>(t);
-        if (id == 0) {
-            head.previous = currentNode;
-            currentNode.next = head;
-            head = currentNode;
-            return;
-        }
-        if (id == size - 1) {
-            last.next = currentNode;
-            currentNode.previous = last;
-            last = currentNode;
-            return;
-        }
-        currentNode = head;
-        int i = 0;
-        if (!contains(t)) {
-            Node<T> node = new Node<>(t);
-            while (currentNode.next != null) {
-                i++;
-                if (i == id) {
-                    Node<T> temp = currentNode.next;
-                    temp.next = node;
-                    node.previous = temp;
-                    node.next = temp.next.next;
-                    temp.next.next.previous = node;
-                }
-            }
-        }
-    }
-
     public void setById(int id, T t) {
         if (id < 0 || id > (size - 1)) {
             throw new IllegalArgumentException("Invalid id value");
         }
-        if(contains(t)){
-            if(findById(id) == t || findById(id).equals(t)) {
+        if (contains(t)) {
+            if (findById(id) == t || findById(id).equals(t)) {
                 editExisting(findById(id), t);
             } else {
                 int i = 0;
@@ -198,16 +152,16 @@ public class DoublyLinkedList<T> {
         }
     }
 
-    public boolean contains(T t) {
+    public boolean contains(Object o) {
         Node<T> currentNode = head;
-        if (currentNode.value == t) {
+        if (currentNode.value == o) {
             return true;
         }
         if (currentNode == null) {
             return false;
         }
         while (currentNode.next != null) {
-            if (currentNode.next.value == t) {
+            if (currentNode.next.value == o) {
                 return true;
             }
             currentNode = currentNode.next;
