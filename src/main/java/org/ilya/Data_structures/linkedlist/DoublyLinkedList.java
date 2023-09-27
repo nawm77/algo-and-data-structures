@@ -1,8 +1,10 @@
-package org.ilya.Data_structures;
+package org.ilya.Data_structures.linkedlist;
 
-import java.util.*;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+import java.util.Objects;
 
-public class DoublyLinkedList<T> {
+public class DoublyLinkedList<T> implements Iterable<T> {
     private Node<T> head;
     private Node<T> last;
     private int size = 0;
@@ -184,6 +186,29 @@ public class DoublyLinkedList<T> {
             sb.append(currentNode.value);
             sb.append("]");
             return sb.toString();
+        }
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return new LinkedListIterator();
+    }
+    private class LinkedListIterator implements Iterator<T> {
+        private Node<T> currentNode = head;
+
+        @Override
+        public boolean hasNext() {
+            return currentNode != null;
+        }
+
+        @Override
+        public T next() {
+            if (!hasNext()) {
+                throw new NoSuchElementException();
+            }
+            T value = currentNode.value;
+            currentNode = currentNode.next;
+            return value;
         }
     }
 

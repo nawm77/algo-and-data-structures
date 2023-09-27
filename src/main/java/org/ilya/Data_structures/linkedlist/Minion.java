@@ -1,4 +1,4 @@
-package org.ilya.Data_structures;
+package org.ilya.Data_structures.linkedlist;
 
 public class Minion {
     private int age;

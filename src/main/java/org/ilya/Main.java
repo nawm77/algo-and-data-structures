@@ -1,8 +1,9 @@
 package org.ilya;
 
 
-import org.ilya.Data_structures.DoublyLinkedList;
-import org.ilya.Data_structures.Minion;
+import org.ilya.Data_structures.linkedlist.DoublyLinkedList;
+import org.ilya.Data_structures.linkedlist.Minion;
+import org.ilya.Data_structures.linkedlist.MinionAgeComparator;
 
 public class Main {
     public static void main(String[] args) {
@@ -23,6 +24,15 @@ public class Main {
         System.out.println(list.getId(min));
         list.editExisting(john, new Minion(50, "Mike", 2.22f));
         System.out.println(list);
-        list.editExisting(new Minion(1, "M", 2.23f), new Minion(50, "Mike", 2.22f));
+        try {
+            list.editExisting(new Minion(1, "M", 2.23f), new Minion(50, "Mike", 2.22f));
+        } catch (IllegalArgumentException e){
+            System.out.println(e.getMessage());
+        }
+        for(Minion i : list){
+            System.out.println(i);
+        }
+        MinionAgeComparator minionAgeComparator = new MinionAgeComparator();
+        System.out.println(minionAgeComparator.compare(john, min));
     }
 }
