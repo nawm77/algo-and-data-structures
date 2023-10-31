@@ -17,13 +17,13 @@ public class Main {
         list.addLast(new Minion(16, "Jack", 1.16f));
         Minion min = new Minion(11, "Minik", 0.76f);
         list.addLast(min);
-        System.out.println(list);
+//        System.out.println(list);
         System.out.println(list.getId(min));
         list.remove(tom);
-        System.out.println(list);
+//        System.out.println(list);
         System.out.println(list.getId(min));
         list.editExisting(john, new Minion(50, "Mike", 2.22f));
-        System.out.println(list);
+//        System.out.println(list);
         try {
             list.editExisting(new Minion(1, "M", 2.23f), new Minion(50, "Mike", 2.22f));
         } catch (IllegalArgumentException e){

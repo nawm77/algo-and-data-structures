@@ -14,11 +14,6 @@ public class ArrayStack<T> implements Iterable<T>{
         size = 0;
     }
 
-    public ArrayStack(int capacity) {
-        array = (T[]) new Object[capacity];
-        size = 0;
-    }
-
     public void push(T item) {
         if (size == array.length) {
             resizeArray();
@@ -40,6 +35,15 @@ public class ArrayStack<T> implements Iterable<T>{
             throw new EmptyStackException();
         }
         return array[size - 1];
+    }
+
+    public int search(T item) {
+        for (int i = size - 1; i >= 0; i--) {
+            if (array[i].equals(item)) {
+                return size - i-1;
+            }
+        }
+        return -1;
     }
 
     public boolean isEmpty() {

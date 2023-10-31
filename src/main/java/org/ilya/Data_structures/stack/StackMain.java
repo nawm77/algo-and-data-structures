@@ -16,5 +16,6 @@ public class StackMain {
         System.out.println("Pop: " + stack.pop());
         System.out.println("Stack size after pops: " + stack.size());
         System.out.println("Peek: " + stack.peek());
+        System.out.println("Search: " + stack.search(1));
     }
 }
