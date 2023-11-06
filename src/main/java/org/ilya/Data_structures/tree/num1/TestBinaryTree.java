@@ -11,7 +11,7 @@ public class TestBinaryTree {
         AbstractBinaryTree<Integer> tree5 = new BinaryTree<>(6, tree3, tree4);
 
         AbstractBinaryTree<Integer> mainTree = new BinaryTree<>(4, tree2, tree5);
-
+        mainTree.printTree(mainTree);
         System.out.println("PreOrder: " + mainTree.preOrder());
         System.out.println("InOrder: " + mainTree.inOrder());
         System.out.println("PostOrder: " + mainTree.postOrder());
@@ -22,6 +22,10 @@ public class TestBinaryTree {
         System.out.println("InOrder traversal:");
         mainTree.forEachInOrder(element -> System.out.print(element + " "));
         System.out.println();
-        mainTree.printTree(mainTree);
+        System.out.println("вывод в ширину");
+        mainTree.breadthFirst();
+        System.out.println();
+        System.out.println("вывод в глубину");
+        mainTree.depthFirst(mainTree);
     }
 }

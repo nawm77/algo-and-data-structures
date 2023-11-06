@@ -14,4 +14,6 @@ public interface AbstractBinaryTree<E> {
     List<AbstractBinaryTree<E>> postOrder();
     void forEachInOrder(Consumer<E> consumer);
     void printTree(AbstractBinaryTree<E> root);
+    void depthFirst(AbstractBinaryTree<E> tree);
+    void breadthFirst();
 }

@@ -163,7 +163,9 @@
 package org.ilya.Data_structures.tree.num1;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 import java.util.function.Consumer;
 
 public class BinaryTree<E> implements AbstractBinaryTree<E> {
@@ -224,10 +226,10 @@ public class BinaryTree<E> implements AbstractBinaryTree<E> {
     public List<AbstractBinaryTree<E>> preOrder() {
         List<AbstractBinaryTree<E>> result = new ArrayList<>();
         result.add(this);
-        if (left != null) {
+        if(this.getLeft()!=null){
             result.addAll(left.preOrder());
         }
-        if (right != null) {
+        if(this.getRight()!=null){
             result.addAll(right.preOrder());
         }
         return result;
@@ -236,11 +238,11 @@ public class BinaryTree<E> implements AbstractBinaryTree<E> {
     @Override
     public List<AbstractBinaryTree<E>> inOrder() {
         List<AbstractBinaryTree<E>> result = new ArrayList<>();
-        if (left != null) {
+        if(this.left != null){
             result.addAll(left.inOrder());
         }
         result.add(this);
-        if (right != null) {
+        if(this.right != null){
             result.addAll(right.inOrder());
         }
         return result;
@@ -249,10 +251,10 @@ public class BinaryTree<E> implements AbstractBinaryTree<E> {
     @Override
     public List<AbstractBinaryTree<E>> postOrder() {
         List<AbstractBinaryTree<E>> result = new ArrayList<>();
-        if (left != null) {
+        if (this.left != null) {
             result.addAll(left.postOrder());
         }
-        if (right != null) {
+        if (this.right != null) {
             result.addAll(right.postOrder());
         }
         result.add(this);
@@ -353,6 +355,43 @@ public class BinaryTree<E> implements AbstractBinaryTree<E> {
             }
             System.out.println();
             perpiece /= 2;
+        }
+    }
+    @Override
+    public void depthFirst(AbstractBinaryTree<E> tree) {
+        if (tree != null) {
+            System.out.print(tree.getKey());
+            depthFirst(tree.getLeft());
+            depthFirst(tree.getRight());
+        }
+    }
+
+    @Override
+    public void breadthFirst() {
+//        Queue<AbstractBinaryTree<E>> queue = new LinkedList<>();
+//        queue.add(this);
+//        while (!queue.isEmpty()) {
+//            AbstractBinaryTree<E> current = queue.poll();
+//            System.out.print(current.getKey());
+//            if (current.getLeft() != null) {
+//                queue.add(current.getLeft());
+//            }
+//            if (current.getRight() != null) {
+//                queue.add(current.getRight());
+//            }
+//        }
+//    }
+        Queue<AbstractBinaryTree<E>> queue = new LinkedList<>();
+        queue.add(this);
+        while (!queue.isEmpty()) {
+            AbstractBinaryTree<E> current = queue.poll();
+            System.out.print(current.getKey());
+            if (current.getLeft() != null) {
+                queue.add(current.getLeft());
+            }
+            if (current.getRight() != null) {
+                queue.add(current.getRight());
+            }
         }
     }
 }
