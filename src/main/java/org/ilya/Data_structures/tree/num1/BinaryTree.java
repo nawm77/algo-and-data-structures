@@ -368,19 +368,6 @@ public class BinaryTree<E> implements AbstractBinaryTree<E> {
 
     @Override
     public void breadthFirst() {
-//        Queue<AbstractBinaryTree<E>> queue = new LinkedList<>();
-//        queue.add(this);
-//        while (!queue.isEmpty()) {
-//            AbstractBinaryTree<E> current = queue.poll();
-//            System.out.print(current.getKey());
-//            if (current.getLeft() != null) {
-//                queue.add(current.getLeft());
-//            }
-//            if (current.getRight() != null) {
-//                queue.add(current.getRight());
-//            }
-//        }
-//    }
         Queue<AbstractBinaryTree<E>> queue = new LinkedList<>();
         queue.add(this);
         while (!queue.isEmpty()) {

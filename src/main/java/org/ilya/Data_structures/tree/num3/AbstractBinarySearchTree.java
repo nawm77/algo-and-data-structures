@@ -34,7 +34,9 @@ public interface AbstractBinarySearchTree <E extends Comparable<E>>{
     E getValue();
     void print(Node<E> root);
     void toLinkedListByHash(Node<E> root);
-    void printDoublyLinkedList(Node<E> node);
+    void printList(Node<E> node);
     void toLinkedListSpiral(Node<E> root);
+    Node<E> getMin(Node<E> root);
+    Node<E> getMax(Node<E> root);
 }
 

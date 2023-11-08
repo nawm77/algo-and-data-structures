@@ -42,12 +42,8 @@ public class BinarySearchTree<E extends Comparable<E>> implements AbstractBinary
         if (root == null || root.value.equals(element)) {
             return root;
         }
-
-        if (element.compareTo(root.value) < 0) {
-            return searchRec(root.leftChild, element);
-        } else {
-            return searchRec(root.rightChild, element);
-        }
+        return element.compareTo(root.value) < 0 ?
+                searchRec(root.leftChild, element) : searchRec(root.rightChild, element);
     }
 
     @Override
@@ -86,13 +82,14 @@ public class BinarySearchTree<E extends Comparable<E>> implements AbstractBinary
             for (Node<E> node : map.get(i)) {
                 head = push(node, head);
             }
+
         }
     }
 
     @Override
-    public void printDoublyLinkedList(Node<E> node) {
+    public void printList(Node<E> node) {
         while (node != null) {
-            System.out.print(node.value + " —> ");
+            System.out.print(node.value + " >>> ");
             node = node.rightChild;
         }
         System.out.println("null");
@@ -252,5 +249,19 @@ public class BinarySearchTree<E extends Comparable<E>> implements AbstractBinary
         while(!stack.empty()) {
             head = push(stack.pop(), head);
         }
+    }
+
+    @Override
+    public Node<E> getMin(Node<E> root) {
+        if (root == null) return null;
+        if(root.leftChild == null) return root;
+        return getMin(root.leftChild);
+    }
+
+    @Override
+    public Node<E> getMax(Node<E> root) {
+        if (root == null) return null;
+        if (root.rightChild == null) return root;
+        return getMax(root.rightChild);
     }
 }
