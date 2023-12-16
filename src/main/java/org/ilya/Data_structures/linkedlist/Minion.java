@@ -1,6 +1,6 @@
 package org.ilya.Data_structures.linkedlist;
 
-public class Minion {
+public class Minion implements Comparable<Minion> {
     private int age;
     private final String name;
     private float height;
@@ -34,5 +34,10 @@ public class Minion {
                 ", name='" + name + '\'' +
                 ", height=" + height +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Minion m) {
+        return this.age - m.age;
     }
 }
