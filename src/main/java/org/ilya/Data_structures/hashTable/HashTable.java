@@ -1,10 +1,7 @@
 package org.ilya.Data_structures.hashTable;
 
 import java.text.MessageFormat;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.NoSuchElementException;
+import java.util.*;
 
 public class HashTable<K, V> implements Iterable<KeyValue<K, V>> {
     private static final int INITIAL_CAPACITY = 16;
@@ -116,7 +113,7 @@ public class HashTable<K, V> implements Iterable<KeyValue<K, V>> {
         try {
             find(key);
             return true;
-        } catch (NoSuchElementException e){
+        } catch (NoSuchElementException e) {
             return false;
         }
     }
@@ -143,38 +140,27 @@ public class HashTable<K, V> implements Iterable<KeyValue<K, V>> {
     }
 
     public Iterable<K> keys() {
-        LinkedList<K> keys = new LinkedList<>();
-        for (LinkedList<KeyValue<K, V>> list : slots) {
-            if (list != null) {
-                for (KeyValue<K, V> entry : list) {
-                    keys.add(entry.getKey());
-                }
-            }
-        }
-        return keys;
+        return Arrays.stream(slots)
+                .filter(Objects::nonNull)
+                .flatMap(List::stream)
+                .map(KeyValue::getKey)
+                .toList();
     }
 
     public Iterable<V> values() {
-        LinkedList<V> values = new LinkedList<>();
-        for (LinkedList<KeyValue<K, V>> list : slots) {
-            if (list != null) {
-                for (KeyValue<K, V> entry : list) {
-                    values.add(entry.getValue());
-                }
-            }
-        }
-        return values;
+        return Arrays.stream(slots)
+                .filter(Objects::nonNull)
+                .flatMap(List::stream)
+                .map(KeyValue::getValue)
+                .toList();
     }
 
-    public int collisionCount() {
-        int sum = 0;
-        for (LinkedList<KeyValue<K, V>> list : slots) {
-            if (list != null && !list.isEmpty()) {
-                sum += list.size() - 1;
-            }
-        }
-        return sum;
+    public long collisionCount() {
+        return Arrays.stream(slots)
+                .filter(list -> list != null && !list.isEmpty())
+                .count();
     }
+
 
     public int getCollisions() {
         return collisions;
@@ -182,13 +168,9 @@ public class HashTable<K, V> implements Iterable<KeyValue<K, V>> {
 
     @Override
     public Iterator<KeyValue<K, V>> iterator() {
-        LinkedList<KeyValue<K, V>> allEntries = new LinkedList<>();
-        for (LinkedList<KeyValue<K, V>> list : slots) {
-            if (list != null) {
-                allEntries.addAll(list);
-            }
-        }
-        return allEntries.iterator();
+        return Arrays.stream(slots)
+                .filter(Objects::nonNull)
+                .flatMap(List::stream)
+                .iterator();
     }
 }
-
